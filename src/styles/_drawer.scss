@@ -1,0 +1,23 @@
+#app-drawer{
+	background: $orange-A700;
+	.v-toolbar{
+		background: $orange-A700;
+	}
+	.v-divider{
+		border-color: rgba($white,0.3);
+	}
+	.v-list{
+		.v-list__tile{
+			.v-list__tile__action{
+				.v-icon{
+					color: $white;
+				}
+			}
+			.v-list__tile__content{
+				.v-list__tile__title{
+					color: $white;
+				}
+			}
+		}
+	}
+}
