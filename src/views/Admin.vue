@@ -8,7 +8,7 @@ import AdminComp from '@/components/Admin.vue';
 
 @Component({
   components: {
-    AdminComp,
+    AdminComp
   },
 })
 export default class Admin extends Vue{}

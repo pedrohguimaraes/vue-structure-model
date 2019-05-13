@@ -42,7 +42,7 @@
             <v-list-tile
               v-for="(child, i) in item.children"
               :key="i"
-              
+              @click=""
             >
               <v-list-tile-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
@@ -54,7 +54,7 @@
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
-          <v-list-tile v-else :key="item.text" >
+          <v-list-tile v-else :key="item.text" @click="">
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -102,28 +102,15 @@
         </v-avatar>
       </v-btn>
     </v-toolbar>
-    <v-content>
+    <v-container fluid fill-height>
+    <h3 class="display-2">Welcome to the site a {{title}}  </h3>
+    </v-container>
+    <!-- <v-content> -->
       <v-container fluid fill-height>
-        <v-layout justify-center align-center>
-          <v-tooltip right>
-            <template v-slot:activator="{ on }">
-              <v-btn :href="source" icon large target="_blank" v-on="on">
-                <v-icon large>code</v-icon>
-              </v-btn>
-            </template>
-            <span>Source</span>
-          </v-tooltip>
-          <v-tooltip right>
-            <template v-slot:activator="{ on }">
-              <v-btn icon large href="https://codepen.io/johnjleider/pen/EQOYVV" target="_blank" v-on="on">
-                <v-icon large>mdi-codepen</v-icon>
-              </v-btn>
-            </template>
-            <span>Codepen</span>
-          </v-tooltip>
-        </v-layout>
+        
+        <Datatable/>
       </v-container>
-    </v-content>
+    <!-- </v-content> -->
     <v-btn
       fab
       bottom
@@ -203,9 +190,14 @@
 
 <script>
   export default {
-    data: () => ({
+    created(){
+      console.log(this.$route.meta.title);
+    },
+    data(){
+      return {
       dialog: false,
       drawer: null,
+      title: this.$route.meta.title,
       items: [
         { icon: 'contacts', text: 'Contacts' },
         { icon: 'history', text: 'Frequently contacted' },
@@ -238,7 +230,7 @@
         { icon: 'phonelink', text: 'App downloads' },
         { icon: 'keyboard', text: 'Go to the old version' }
       ]
-    }),
+    }},
     props: {
       source: String
     }
