@@ -103,12 +103,12 @@
       </v-btn>
     </v-toolbar>
     <v-container fluid fill-height>
-    <h3 class="display-2">Welcome to the site a {{title}}  </h3>
+      <h3 class="display-2"> {{title}}  </h3>
+     {{campos}}
     </v-container>
     <!-- <v-content> -->
       <v-container fluid fill-height>
-        
-        <Datatable/>
+        <Datatable v-bind:lista="campos"/>
       </v-container>
     <!-- </v-content> -->
     <v-btn
@@ -190,47 +190,41 @@
 
 <script>
   export default {
-    created(){
-      console.log(this.$route.meta.title);
-    },
     data(){
       return {
-      dialog: false,
-      drawer: null,
-      title: this.$route.meta.title,
-      items: [
-        { icon: 'contacts', text: 'Contacts' },
-        { icon: 'history', text: 'Frequently contacted' },
-        { icon: 'content_copy', text: 'Duplicates' },
-        {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          text: 'Labels',
-          model: true,
-          children: [
-            { icon: 'add', text: 'Create label' }
-          ]
-        },
-        {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          text: 'More',
-          model: false,
-          children: [
-            { text: 'Import' },
-            { text: 'Export' },
-            { text: 'Print' },
-            { text: 'Undo changes' },
-            { text: 'Other contacts' }
-          ]
-        },
-        { icon: 'settings', text: 'Settings' },
-        { icon: 'chat_bubble', text: 'Send feedback' },
-        { icon: 'help', text: 'Help' },
-        { icon: 'phonelink', text: 'App downloads' },
-        { icon: 'keyboard', text: 'Go to the old version' }
-      ]
-    }},
+        dialog: false,
+        drawer: null,
+        title: this.$route.meta.title,
+        items: [
+          { icon: 'content_copy', text: 'Listas' },
+          { icon: 'contacts', text: 'Fornecedores' },
+          { icon: 'storage', text: 'Produtos' },
+          {
+            icon: 'keyboard_arrow_up',
+            'icon-alt': 'keyboard_arrow_down',
+            text: 'More',
+            model: false,
+            children: [
+              { text: 'Import' },
+              { text: 'Export' },
+              { text: 'Print' },
+              { text: 'Undo changes' },
+              { text: 'Other contacts' }
+            ]
+          },
+        ],
+        campos: null
+      }
+    },
+    mounted(){
+      this.listagemCampo()
+    },
+    methods:{
+       async listagemCampo(){
+          const campos = await this.$http.get('http://localhost/listapreco-api/campo')
+          this.campos = campos.data.data
+      },
+    },
     props: {
       source: String
     }
