@@ -3,7 +3,8 @@
 
   <v-card>
     <v-card-title>
-      Nutrition 
+      Nutrition  
+    
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -23,7 +24,7 @@
         <td class="text-xs-right">{{ props.item.nome }}</td>
         <td class="text-xs-right">{{ props.item.descricao}}</td>
         <td class="text-xs-right">{{ props.item.tipo }}</td>
-        <td class="text-xs-right">{{ props.item.listaID }}</td>
+        <td class="text-xs-right">{{ props.item.listaId }}</td>
         <td class="text-xs-right">{{ props.item.titulo }}</td>
       </template>
       <template v-slot:no-results>
@@ -54,7 +55,7 @@
             {text: 'Nome', value: 'nome'},
             {text: 'Descrição', value: 'descricao'},
             {text: 'Tipo', value: 'tipo'},
-            {text: 'Código da lista', value: 'listaID'},
+            {text: 'Código da lista', value: 'listaId'},
             {text: 'Lista', value: 'titulo'},
         ],
         desserts: [

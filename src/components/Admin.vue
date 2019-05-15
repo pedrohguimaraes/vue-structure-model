@@ -104,7 +104,6 @@
     </v-toolbar>
     <v-container fluid fill-height>
       <h3 class="display-2"> {{title}}  </h3>
-     {{campos}}
     </v-container>
     <!-- <v-content> -->
       <v-container fluid fill-height>
