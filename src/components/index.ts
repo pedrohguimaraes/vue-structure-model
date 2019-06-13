@@ -1,8 +1,8 @@
 //LIB
 import Vue from 'vue'
 
-import Admin from './Admin.vue'
-import Datatable from './Datatable.vue';
+import Lista from './lista/Lista.vue';
+import Grid from './Grid.vue';
 
-Vue.component('Admin', Admin);
-Vue.component('Datatable', Datatable);
+Vue.component('Lista', Lista);
+Vue.component('Grid', Grid);

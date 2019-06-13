@@ -5,7 +5,8 @@ import Router from 'vue-router'
 //COMPONENTS
 import Login from '@/views/Login.vue'
 import Home from '@/views/Home.vue'
-import Admin from '@/views/Admin.vue'
+import Lista from '@/views/Lista.vue'
+import Product from '@/views/Product.vue'
 
 Vue.use(Router)
 
@@ -15,14 +16,33 @@ let router =  new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/home',
-      name: 'Admin',
-      component: Admin,
+      path: '/lista',
+      name: 'Lista',
+      component: Lista,
       meta: {
         auth: true,
-        title: 'Admin'
+        title: 'Listas de preço'
       }
     },
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home,
+      meta: {
+        auth: true,
+        title: 'Home'
+      }
+    },
+    {
+      path: '/product',
+      name: 'Product',
+      component: Product,
+      meta: {
+        auth: true,
+        title: 'Product'
+      }
+    },
+
     { path: '*', redirect: '/home' }
   ]
 });
