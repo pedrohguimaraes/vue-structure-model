@@ -74,7 +74,7 @@
       <v-icon>add</v-icon>
     </v-btn>
     <v-dialog v-model="dialog" width="800px">
-      <!-- <form @submit="cadastrar" method="post"> -->
+      <!-- <form @submit="cadastrar" action="http://localhost/listapreco-api/lista" method="post"> -->
         <v-card>
           <v-card-title
             class="grey lighten-4 py-4 title"
@@ -110,13 +110,13 @@
               </v-flex>
 
               <v-flex xs6>
-                <input type="file" ref="file" v-on:change="handleFileUpload()" id="file"/>
+                <input type="file" ref="files" id="files" multiple v-on:change="handleFiles()"/>
               </v-flex>
 
-              <v-flex xs6 lg4>
+              <!-- <v-flex xs6 lg4>
                 <h4>Validade</h4>
                 <input v-model="postData.validade" type="date" id="validade"/>
-              </v-flex>
+              </v-flex> -->
               
             </v-layout>
           </v-container>
@@ -126,7 +126,7 @@
             <v-btn flat @click="dialog = false">Cancelar</v-btn>
           </v-card-actions>
         </v-card>
-      <!-- </form> -->
+      </form>
     </v-dialog>
   </v-app>
 </template>
@@ -138,9 +138,10 @@
         date: new Date().toISOString().substr(0, 10),
         dialog: false,
         drawer: null,
-        file: '',
+        files: '',
         title: this.$route.meta.title,
         items: [],
+        post_url: 'files',
         fornecedores: [],
         postData:{
           caminho: null,
@@ -259,13 +260,17 @@
         this.items = listas.data.data
       
       },
+
       async cadastrar(){
 
         let formData = new FormData();
-        formData.append('file', this.file);
-        this.postData.fornecedorId =  this.postData.fornecedorId.id;
-        this.postData.caminho = formData
-        
+        formData.append('file', this.files)
+        let teste = localstorage.root.getFile("lista-3m-abril-2019.xls", {create: true});
+        console.log(teste)
+        this.postData.fornecedorId =  this.postData.fornecedorId.id
+        this.postData.caminho = formData.get('file')
+        console.log(this.postData.caminho.name)
+
         const listas = await this.$http.post('http://localhost/listapreco-api/lista', 
         this.postData, 
         {
@@ -275,8 +280,10 @@
         })
 
       },
-      handleFileUpload(){
-        this.file = this.$refs.file.files[0];
+
+      handleFiles() {
+        this.files = this.$refs.files.files[0];
+        console.log(this.files)
       },
       formatDate (date) {
         if (!date) return null
